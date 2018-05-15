@@ -1,10 +1,12 @@
 package com.sapient.InterviewSchedular.model;
 
+import java.util.List;
+
 public class Candidate {
 	String name;
 	String id;
 	String priority;
-	TimeSlot timeSlot;
+	List<TimeSlot> timeSlotList;
 
 	public String getName() {
 		return name;
@@ -23,6 +25,7 @@ public class Candidate {
 	}
 
 	public String getPriority() {
+
 		return priority;
 	}
 
@@ -30,12 +33,16 @@ public class Candidate {
 		this.priority = priority;
 	}
 
-	public TimeSlot getTimeSlot() {
-		return timeSlot;
+	public List<TimeSlot> getTimeSlotList() {
+		return timeSlotList;
 	}
 
-	public void setTimeSlot(TimeSlot timeSlot) {
-		this.timeSlot = timeSlot;
+	public void setTimeSlotList(List<TimeSlot> timeSlotList) {
+		this.timeSlotList = timeSlotList;
+	}
+
+	public void addTimeSlotToList(TimeSlot timeSlot) {
+		this.timeSlotList.add(timeSlot);
 	}
 
 }
