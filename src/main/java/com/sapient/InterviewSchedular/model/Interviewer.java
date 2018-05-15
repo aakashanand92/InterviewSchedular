@@ -5,6 +5,8 @@ public class Interviewer {
 	String name;
 	String priorty;
 	Integer id;
+	TimeSlot timeSlot;
+	String superVisor;
 
 	public Interviewer() {
 
@@ -32,6 +34,22 @@ public class Interviewer {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public TimeSlot getTimeSlot() {
+		return timeSlot;
+	}
+
+	public String getSuperVisor() {
+		return superVisor;
+	}
+
+	public void setSuperVisor(String superVisor) {
+		this.superVisor = superVisor;
+	}
+
+	public void setTimeSlot(TimeSlot timeSlot) {
+		this.timeSlot = timeSlot;
 	}
 
 }

@@ -1,7 +1,9 @@
 package com.sapient.InterviewSchedular.rest;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -12,12 +14,12 @@ import org.springframework.stereotype.Component;
 import com.sapient.InterviewSchedular.model.Interviewer;
 
 @Component
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.TEXT_PLAIN)
 @Path("/interviewer")
 public class InterviewerEndPoint {
 
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
 	public String createInterviewer(Interviewer intervewer) {
 		if (intervewer.getId() == null) {
 			// create new interviewer
@@ -29,16 +31,16 @@ public class InterviewerEndPoint {
 		return "Interviewer name is " + intervewer.getName() + " priority is " + intervewer.getPriorty();
 	}
 
-	/*
-	 * Slot should come in this format
-	 * 
-	 * Monday (M) - 4-5 is 1, 5-6 is 2; Tuesday(T) - 4-5 is 1, 5-6 is 2;
-	 * 
-	 */
-	@POST
+	@PUT
 	@Path("{id}/addTimeSlot")
 	public String addTimeSlot(@PathParam("id") String id, String slot) {
 
+		return null;
+	}
+
+	@GET
+	@Path("{id}")
+	public String getListOfCandidates(@PathParam("id") String id) {
 		return null;
 	}
 
