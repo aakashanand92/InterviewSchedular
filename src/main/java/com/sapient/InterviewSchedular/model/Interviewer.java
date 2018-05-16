@@ -2,12 +2,11 @@ package com.sapient.InterviewSchedular.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Interviewer {
@@ -17,12 +16,14 @@ public class Interviewer {
 	Integer id;
 
 	String name;
+
 	String priorty;
 
-	@OneToMany(mappedBy = "interviewer", cascade = CascadeType.PERSIST)
+	// @OneToMany(mappedBy = "interviewer", cascade = CascadeType.PERSIST)
+	@Transient
 	List<TimeSlot> timeSlotList;
 
-	String superVisor;
+	String supervisor;
 
 	public Interviewer() {
 
@@ -57,11 +58,11 @@ public class Interviewer {
 	}
 
 	public String getSuperVisor() {
-		return superVisor;
+		return supervisor;
 	}
 
 	public void setSuperVisor(String superVisor) {
-		this.superVisor = superVisor;
+		this.supervisor = superVisor;
 	}
 
 	public void setTimeSlotList(List<TimeSlot> timeSlotList) {

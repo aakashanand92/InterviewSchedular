@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class TimeSlot {
@@ -15,8 +14,17 @@ public class TimeSlot {
 	Integer start;
 	Integer end;
 	String date;
-	@ManyToOne
-	Interviewer interviewer;
+
+	String timeSlotFor;
+	Integer idOfOwner;
+
+	public Integer getIdOfOwner() {
+		return idOfOwner;
+	}
+
+	public void setIdOfOwner(Integer idOfOwner) {
+		this.idOfOwner = idOfOwner;
+	}
 
 	public Integer getStart() {
 		return start;
@@ -42,11 +50,20 @@ public class TimeSlot {
 		this.date = date;
 	}
 
-	public Interviewer getInterviewer() {
-		return interviewer;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setInterviewer(Interviewer interviewer) {
-		this.interviewer = interviewer;
+	public void setId(Integer id) {
+		this.id = id;
 	}
+
+	public String getTimeSlotFor() {
+		return timeSlotFor;
+	}
+
+	public void setTimeSlotFor(String timeSlotFor) {
+		this.timeSlotFor = timeSlotFor;
+	}
+
 }

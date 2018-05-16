@@ -2,15 +2,14 @@ package com.sapient.InterviewSchedular.rest;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,39 +20,36 @@ import com.sapient.InterviewSchedular.service.InterviewerService;
 @RestController
 
 @RequestMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, path = { "/interviewer" })
-// @Path("/interviewer")
+
 public class InterviewerEndPoint {
 	@Autowired
 	InterviewerService service;
 
-	// @POST
-	// @RequestMapping(value = "/test/" method )
 	@PostMapping("/")
-	public Integer createInterviewer(Interviewer interviewer) {
+	public Integer createInterviewer(@RequestBody Interviewer interviewer) {
 		this.service.createInterviewer(interviewer);
 		return interviewer.getId();
-		// return 1;
+
 	}
 
-	@PUT
-
-	@Path("{id}/addTimeSlots")
-	public String addTimeSlots(@PathParam("id") Integer id, List<TimeSlot> slot) {
+	@PutMapping("/{id}/timeSlots/add")
+	public String addTimeSlots(@PathVariable("id") Integer id, @RequestBody List<TimeSlot> slot) {
 		this.service.addTimeSlotsForInterviewer(slot, id);
 		return null;
 	}
 
-	@GET
+	@GetMapping("/{id}/timeSlots")
+	public List<TimeSlot> findTimeSlotsForInterviewer(@PathVariable("id") Integer id) {
+		return this.service.getTimeSlotOfInterviewer(id);
+	}
 
-	@Path("{id}")
-	public String getListOfCandidates(@PathParam("id") String id) {
+	@GetMapping("{id}")
+	public String getListOfCandidates(@PathVariable("id") String id) {
 		return null;
 	}
 
-	@DELETE
-
-	@Path("{id}/delete")
-	public void deleteInterviewerById(@PathParam("id") Integer id) {
+	@DeleteMapping("{id}/delete")
+	public void deleteInterviewerById(@PathVariable("id") Integer id) {
 		this.service.deleteInterviewerById(id);
 	}
 
