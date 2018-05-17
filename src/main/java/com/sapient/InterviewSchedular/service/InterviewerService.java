@@ -25,6 +25,7 @@ public class InterviewerService {
 
 	public void deleteInterviewerById(Integer id) {
 		dao.deleteById(id);
+		timeSlotService.deleteTimeSlotForInterviewer(id);
 	}
 
 	public Interviewer getInterviewerById(Integer id) {
