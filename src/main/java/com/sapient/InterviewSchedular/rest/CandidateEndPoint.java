@@ -2,6 +2,8 @@ package com.sapient.InterviewSchedular.rest;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,13 +17,14 @@ import com.sapient.InterviewSchedular.model.TimeSlot;
 import com.sapient.InterviewSchedular.service.CandidateService;
 
 @RestController
-@RequestMapping(value = "/candidate")
-public class CandidateEndPoint {
+@RequestMapping(value = "/candidate", consumes = { MediaType.APPLICATION_JSON_VALUE })
 
+public class CandidateEndPoint {
+	@Autowired
 	CandidateService service;
 
-	@PostMapping(path = "/")
-	public Integer createCandidate(Candidate candidate) {
+	@PostMapping("/")
+	public Integer createCandidate(@RequestBody Candidate candidate) {
 		this.service.createCandidate(candidate);
 		return candidate.getId();
 	}

@@ -18,6 +18,16 @@ public class TimeSlot {
 	String timeSlotFor;
 	Integer idOfOwner;
 
+	String priority;
+
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+
 	public Integer getIdOfOwner() {
 		return idOfOwner;
 	}

@@ -53,4 +53,9 @@ public class InterviewerEndPoint {
 		this.service.deleteInterviewerById(id);
 	}
 
+	@GetMapping("/schedule")
+	public String schedule() {
+		return this.service.scheduleInterviews();
+	}
+
 }

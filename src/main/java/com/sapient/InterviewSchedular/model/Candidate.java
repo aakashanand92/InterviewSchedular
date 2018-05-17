@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Candidate {
@@ -15,6 +16,7 @@ public class Candidate {
 	Integer id;
 	String name;
 	String priority;
+	@Transient
 	List<TimeSlot> timeSlotList;
 
 	public String getName() {

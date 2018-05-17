@@ -17,7 +17,7 @@ public class Interviewer {
 
 	String name;
 
-	String priorty;
+	String priority;
 
 	@Transient
 	List<TimeSlot> timeSlotList;
@@ -36,12 +36,12 @@ public class Interviewer {
 		this.name = name;
 	}
 
-	public String getPriorty() {
-		return priorty;
+	public String getPriority() {
+		return priority;
 	}
 
-	public void setPriorty(String priorty) {
-		this.priorty = priorty;
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 
 	public Integer getId() {

@@ -18,6 +18,8 @@ public class InterviewerService {
 	InterviewerRepo dao;
 	@Autowired
 	TimeSlotService timeSlotService;
+	@Autowired
+	Schedular schedular;
 
 	public void createInterviewer(Interviewer interviewer) {
 		dao.save(interviewer);
@@ -41,9 +43,15 @@ public class InterviewerService {
 	}
 
 	public void addTimeSlotsForInterviewer(List<TimeSlot> timeSlotList, Integer id) {
+		String priority = getInterviewerById(id).getPriority();
 		for (TimeSlot ts : timeSlotList) {
+			ts.setPriority(priority);
 			timeSlotService.createTimeSlotForInterviewer(ts, id);
 		}
+	}
+
+	public String scheduleInterviews() {
+		return this.schedular.schedule().toString();
 	}
 
 }

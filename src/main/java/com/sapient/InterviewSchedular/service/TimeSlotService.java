@@ -54,4 +54,11 @@ public class TimeSlotService {
 		return this.dao.findTimeSlotByCandId(candidateId);
 	}
 
+	public List<TimeSlot> getAllTimeSlotsForCandidates() {
+		return this.dao.getAllTimeSlotsForCandidates();
+	}
+
+	public List<TimeSlot> getAllTimeSlotsForInterviewers() {
+		return this.dao.getAllTimeSlotsForInterviewers();
+	}
 }

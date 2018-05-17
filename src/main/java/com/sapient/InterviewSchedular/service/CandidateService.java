@@ -39,7 +39,9 @@ public class CandidateService {
 	}
 
 	public void addTimeSlotsForCandidate(List<TimeSlot> timeSlotList, Integer id) {
+		String priority = getCandidateById(id).getPriority();
 		for (TimeSlot ts : timeSlotList) {
+			ts.setPriority(priority);
 			timeSlotService.createTimeSlotForCandidate(ts, id);
 		}
 	}
