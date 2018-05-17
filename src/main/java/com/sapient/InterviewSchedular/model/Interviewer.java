@@ -12,14 +12,13 @@ import javax.persistence.Transient;
 public class Interviewer {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 
 	String name;
 
 	String priorty;
 
-	// @OneToMany(mappedBy = "interviewer", cascade = CascadeType.PERSIST)
 	@Transient
 	List<TimeSlot> timeSlotList;
 
@@ -57,11 +56,11 @@ public class Interviewer {
 		return timeSlotList;
 	}
 
-	public String getSuperVisor() {
+	public String getSupervisor() {
 		return supervisor;
 	}
 
-	public void setSuperVisor(String superVisor) {
+	public void setSupervisor(String superVisor) {
 		this.supervisor = superVisor;
 	}
 

@@ -1,6 +1,7 @@
 package com.sapient.InterviewSchedular.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -24,19 +25,24 @@ public class TimeSlotService {
 		return timeSlot.getId();
 	}
 
-	public void createTimeSlotForCandidate() {
-
+	public Integer createTimeSlotForCandidate(TimeSlot timeSlot, Integer candidateId) {
+		timeSlot.setTimeSlotFor(CANDIDATE_CODE);
+		timeSlot.setIdOfOwner(candidateId);
+		dao.save(timeSlot);
+		return timeSlot.getId();
 	}
 
 	public void deleteTimeSlotForInterviewer(Integer interviewerId) {
-		dao.deleteTimeSlotOfInterviewer(interviewerId);
+		dao.deleteTimeSlotForInterviewer(interviewerId);
 	}
 
-	public void deleteTimeSlotForCandidate() {
-
+	public void deleteTimeSlotForCandidate(Integer candidateId) {
+		dao.deleteTimeSlotForCandidate(candidateId);
 	}
 
-	public void findTimeSlotById() {
+	public TimeSlot findTimeSlotById(Integer id) {
+		Optional<TimeSlot> op = dao.findById(id);
+		return op.isPresent() ? op.get() : null;
 
 	}
 
@@ -44,8 +50,8 @@ public class TimeSlotService {
 		return this.dao.findTimeSlotByIntId(interveiwerId);
 	}
 
-	public void findTimeSlotByCandId() {
-
+	public List<TimeSlot> findTimeSlotByCandId(Integer candidateId) {
+		return this.dao.findTimeSlotByCandId(candidateId);
 	}
 
 }

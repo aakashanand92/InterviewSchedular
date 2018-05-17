@@ -13,6 +13,13 @@ public interface TimeSlotRepo extends JpaRepository<TimeSlot, Integer> {
 	@Query(value = "SELECT * FROM TIME_SLOT WHERE ID_OF_OWNER = :id AND TIME_SLOT_FOR = 'I'", nativeQuery = true)
 	public List<TimeSlot> findTimeSlotByIntId(@Param("id") int id);
 
+	@Query(value = "SELECT * FROM TIME_SLOT WHERE ID_OF_OWNER = :id AND TIME_SLOT_FOR = 'C'", nativeQuery = true)
+	public List<TimeSlot> findTimeSlotByCandId(@Param("id") int id);
+
 	@Query(value = "DELETE TIME_SLOT WHERE ID_OF_OWNER = :id AND TIME_SLOT_FOR = 'I' ", nativeQuery = true)
-	public void deleteTimeSlotOfInterviewer(@Param("id") int id);
+	public void deleteTimeSlotForInterviewer(@Param("id") int id);
+
+	@Query(value = "DELETE TIME_SLOT WHERE ID_OF_OWNER = :id AND TIME_SLOT_FOR = 'C' ", nativeQuery = true)
+	public void deleteTimeSlotForCandidate(@Param("id") int id);
+
 }

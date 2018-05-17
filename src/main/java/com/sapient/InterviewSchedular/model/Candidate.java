@@ -2,9 +2,18 @@ package com.sapient.InterviewSchedular.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Candidate {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
 	String name;
-	String id;
 	String priority;
 	List<TimeSlot> timeSlotList;
 
@@ -16,11 +25,11 @@ public class Candidate {
 		this.name = name;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

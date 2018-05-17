@@ -1,16 +1,40 @@
 package com.sapient.InterviewSchedular.rest;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.TEXT_PLAIN)
-@Path("/candidate")
+import com.sapient.InterviewSchedular.model.Candidate;
+import com.sapient.InterviewSchedular.model.TimeSlot;
+import com.sapient.InterviewSchedular.service.CandidateService;
+
+@RestController
+@RequestMapping(value = "/candidate")
 public class CandidateEndPoint {
+
+	CandidateService service;
+
+	@PostMapping(path = "/")
+	public Integer createCandidate(Candidate candidate) {
+		this.service.createCandidate(candidate);
+		return candidate.getId();
+	}
+
+	@PutMapping("/{id}/timeSlots/add")
+	public String addTimeSlots(@PathVariable("id") Integer id, @RequestBody List<TimeSlot> slot) {
+		this.service.addTimeSlotsForCandidate(slot, id);
+		return null;
+	}
+
+	@DeleteMapping("{id}/delete")
+	public void deleteInterviewerById(@PathVariable("id") Integer id) {
+		this.service.deleteCandidateById(id);
+	}
 
 }
