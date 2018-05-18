@@ -3,9 +3,9 @@ package com.sapient.InterviewSchedular.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sapient.InterviewSchedular.dao.TimeSlotRepo;
 import com.sapient.InterviewSchedular.model.TimeSlot;
@@ -13,10 +13,12 @@ import com.sapient.InterviewSchedular.model.TimeSlot;
 @Service
 public class TimeSlotService {
 
-	@Inject
+	@Autowired
 	private TimeSlotRepo dao;
-	private static String CANDIDATE_CODE = "C";
-	private static String INTERVIEWER_CODE = "I";
+	public static String CANDIDATE_CODE = "C";
+	public static String INTERVIEWER_CODE = "I";
+	public static String SCHEDULED_YES = "Y";
+	public static String SCHEDULED_NO = "N";
 
 	public Integer createTimeSlotForInterviewer(TimeSlot timeSlot, Integer interviewerID) {
 		timeSlot.setTimeSlotFor(INTERVIEWER_CODE);
@@ -60,5 +62,15 @@ public class TimeSlotService {
 
 	public List<TimeSlot> getAllTimeSlotsForInterviewers() {
 		return this.dao.getAllTimeSlotsForInterviewers();
+	}
+
+	@Transactional
+	public void setScheduled(List<Integer> slotIds) {
+		this.dao.setScheduledForIds(slotIds);
+
+	}
+
+	public void removeScheduled(Integer slotId) {
+		// this.dao.save(this.dao.findById(slotId).get().setScheduled(SCHEDULED_NO));
 	}
 }

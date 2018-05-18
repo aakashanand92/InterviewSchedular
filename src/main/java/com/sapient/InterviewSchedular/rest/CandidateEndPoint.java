@@ -36,7 +36,7 @@ public class CandidateEndPoint {
 	}
 
 	@DeleteMapping("{id}/delete")
-	public void deleteInterviewerById(@PathVariable("id") Integer id) {
+	public void deleteCandidateById(@PathVariable("id") Integer id) {
 		this.service.deleteCandidateById(id);
 	}
 

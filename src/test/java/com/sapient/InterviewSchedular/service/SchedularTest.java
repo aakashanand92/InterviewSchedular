@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.sapient.InterviewSchedular.model.TimeSlot;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class SchedularTest {
-	/*
-	 * Expected output is map with 8=1,9=2 mapping
-	 */
+
 	@Test
 	public void testSchedule() {
 		System.setProperty("sapient.schedular.priority_order", "P1,P2");

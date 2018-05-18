@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.sapient.InterviewSchedular.service.TimeSlotService;
+
 @Entity
 public class TimeSlot {
 	@Id
@@ -19,6 +21,15 @@ public class TimeSlot {
 	Integer idOfOwner;
 
 	String priority;
+	String scheduled = TimeSlotService.SCHEDULED_NO;
+
+	public String getScheduled() {
+		return scheduled;
+	}
+
+	public void setScheduled(String scheduled) {
+		this.scheduled = scheduled;
+	}
 
 	public String getPriority() {
 		return priority;
