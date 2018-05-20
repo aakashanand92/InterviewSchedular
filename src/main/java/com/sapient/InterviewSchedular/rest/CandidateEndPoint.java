@@ -1,6 +1,7 @@
 package com.sapient.InterviewSchedular.rest;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -30,14 +31,15 @@ public class CandidateEndPoint {
 	}
 
 	@PutMapping("/{id}/timeSlots/add")
-	public String addTimeSlots(@PathVariable("id") Integer id, @RequestBody List<TimeSlot> slot) {
-		this.service.addTimeSlotsForCandidate(slot, id);
-		return null;
+	public List<Integer> addTimeSlots(@PathVariable("id") Integer id, @RequestBody List<TimeSlot> slots) {
+		this.service.addTimeSlotsForCandidate(slots, id);
+		return slots.stream().map(slot -> slot.getId()).collect(Collectors.toList());
 	}
 
 	@DeleteMapping("{id}/delete")
-	public void deleteCandidateById(@PathVariable("id") Integer id) {
+	public boolean deleteCandidateById(@PathVariable("id") Integer id) {
 		this.service.deleteCandidateById(id);
+		return true;
 	}
 
 }

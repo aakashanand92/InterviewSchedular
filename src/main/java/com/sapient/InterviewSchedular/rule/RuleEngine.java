@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,8 @@ import com.sapient.InterviewSchedular.model.TimeSlot;
 public class RuleEngine {
 	@Autowired
 	Environment env;
-
+	@Autowired
+	ApplicationContext ac;
 	public static final String DEFAULT_RULE_PACKAGE = "com.sapient.InterviewSchedular.rule";
 	private List<IRule> rulesToBeChecked = null;
 
@@ -25,17 +27,11 @@ public class RuleEngine {
 
 		for (String className : listOfRuleClasses) {
 			try {
-
-				Class<IRule> ruleClass = (Class<IRule>) Class.forName(DEFAULT_RULE_PACKAGE + "." + className);
-				rulesToBeChecked.add(ruleClass.newInstance());
-			} catch (ClassNotFoundException ce) {
-				System.err.println("Rule class with name " + className
-						+ " not found in default package so rule engine will not run this rule");
-			} catch (InstantiationException | IllegalAccessException e) {
-				System.err.println("Rule class with name " + className + "Cannot be instantiated, Error is "
-						+ e.getLocalizedMessage());
+				rulesToBeChecked.add((IRule) ac.getBean(className));
+			} catch (Exception e) {
+				System.err.println("Can't instatiate class " + className);
+				e.printStackTrace();
 			}
-
 		}
 	}
 

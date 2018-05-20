@@ -12,7 +12,9 @@ public class PriorityRule implements IRule {
 	Environment env;
 
 	@Override
-	public boolean executeRule(TimeSlot candidateTimeSlot, TimeSlot interviewerTimeSlot) {
+	public boolean executeRule(IRuleInput... inputs) {
+		TimeSlot candidateTimeSlot = (TimeSlot) inputs[0];
+		TimeSlot interviewerTimeSlot = (TimeSlot) inputs[1];
 		String strPriorityOrder = env.getProperty("sapient.schedular.priority_order");
 		if (strPriorityOrder == null) {
 			strPriorityOrder = System.getProperty("sapient.schedular.priority_order");

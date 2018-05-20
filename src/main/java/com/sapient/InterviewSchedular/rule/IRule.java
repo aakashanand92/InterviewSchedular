@@ -1,8 +1,12 @@
 package com.sapient.InterviewSchedular.rule;
 
-import com.sapient.InterviewSchedular.model.TimeSlot;
-
+/**
+ * All rule classes should implement this.
+ * 
+ * @author aakanand1
+ *
+ */
 public interface IRule {
 
-	public boolean executeRule(TimeSlot candidateTimeSlot, TimeSlot interviewerTimeSlot);
+	public boolean executeRule(IRuleInput... inputs);
 }

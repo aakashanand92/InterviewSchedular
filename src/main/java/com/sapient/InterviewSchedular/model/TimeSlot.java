@@ -5,10 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.sapient.InterviewSchedular.rule.IRuleInput;
 import com.sapient.InterviewSchedular.service.TimeSlotService;
 
 @Entity
-public class TimeSlot {
+public class TimeSlot implements IRuleInput {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;

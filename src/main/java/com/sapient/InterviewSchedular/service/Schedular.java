@@ -57,41 +57,9 @@ public class Schedular {
 
 	}
 
-	private boolean isSameTimeSlot(TimeSlot candTimeSlot, TimeSlot intTimeSlot) {
-		if (candTimeSlot.getDate().equals(intTimeSlot.getDate())
-				&& candTimeSlot.getStart().equals(intTimeSlot.getStart())
-				&& candTimeSlot.getEnd().equals(intTimeSlot.getEnd())) {
-			return true;
-		}
-		return false;
-	}
-
 	public List<Interview> schedule() {
 		return this.schedule(timeSlotService.getAllTimeSlotsForCandidates(),
 				timeSlotService.getAllTimeSlotsForInterviewers());
-	}
-
-	private boolean priorityCompatible(TimeSlot candTimeSlot, TimeSlot intTimeSlot) {
-		String strPriorityOrder = env.getProperty("sapient.schedular.priority_order");
-		if (strPriorityOrder == null) {
-			strPriorityOrder = System.getProperty("sapient.schedular.priority_order");
-		}
-		String[] str = strPriorityOrder.split(",");
-		Integer intPriorityIndex = 0;
-		Integer candPriorityIndex = 0;
-		for (int i = 0; i < str.length; i++) {
-			if (str[i].equals(candTimeSlot.getPriority())) {
-				candPriorityIndex = i;
-			}
-			if (str[i].equals(intTimeSlot.getPriority())) {
-				intPriorityIndex = i;
-			}
-		}
-		if (candPriorityIndex >= intPriorityIndex) {
-			return true;
-		}
-
-		return false;
 	}
 
 }
