@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sapient.InterviewSchedular.model.Interview;
 import com.sapient.InterviewSchedular.model.TimeSlot;
+import com.sapient.InterviewSchedular.rule.RuleEngine;
 
 @Service
 public class Schedular {
@@ -19,6 +20,8 @@ public class Schedular {
 	TimeSlotService timeSlotService;
 	@Autowired
 	Environment env;
+	@Autowired
+	RuleEngine ruleEngine;
 
 	List<Interview> schedule(List<TimeSlot> candidatesTimeSlot, List<TimeSlot> interviewersTimeSlot) {
 		List<Interview> scheduledInterviews = new ArrayList<Interview>();
@@ -29,7 +32,7 @@ public class Schedular {
 				continue;
 			}
 			for (TimeSlot intTimeSlot : interviewersTimeSlot) {
-				if (isSameTimeSlot(candTimeSlot, intTimeSlot) && priorityCompatible(candTimeSlot, intTimeSlot)) {
+				if (ruleEngine.checkRules(candTimeSlot, intTimeSlot)) {
 					Interview interview = new Interview();
 					interview.setCandidateId(candTimeSlot.getIdOfOwner());
 					interview.setInterviewerId(intTimeSlot.getIdOfOwner());
