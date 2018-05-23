@@ -8,6 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+/**
+ * Represents the candidate details that needs to be registered in the system
+ * 
+ * @author aakanand1
+ *
+ */
 @Entity
 public class Candidate {
 
@@ -16,8 +22,27 @@ public class Candidate {
 	Integer id;
 	String name;
 	String priority;
+	String email;
+	String phoneNo;
+
 	@Transient
 	List<TimeSlot> timeSlotList;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
 
 	public String getName() {
 		return name;

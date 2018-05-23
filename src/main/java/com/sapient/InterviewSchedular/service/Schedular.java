@@ -22,6 +22,8 @@ public class Schedular {
 	Environment env;
 	@Autowired
 	RuleEngine ruleEngine;
+	@Autowired
+	InterviewService interviewService;
 
 	List<Interview> schedule(List<TimeSlot> candidatesTimeSlot, List<TimeSlot> interviewersTimeSlot) {
 		List<Interview> scheduledInterviews = new ArrayList<Interview>();
@@ -53,6 +55,7 @@ public class Schedular {
 
 		}
 		this.timeSlotService.setScheduled(timeSlotsUsed);
+		this.interviewService.saveInterviews(scheduledInterviews);
 		return scheduledInterviews;
 
 	}

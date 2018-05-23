@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sapient.InterviewSchedular.dao.InterviewerRepo;
 import com.sapient.InterviewSchedular.model.Interviewer;
@@ -48,8 +49,27 @@ public class InterviewerService {
 		}
 	}
 
+	@Transactional
+	public boolean updateInterviewer(Integer id, Interviewer interviewer) {
+		Optional<Interviewer> op = this.dao.findById(id);
+		if (op.isPresent()) {
+			Interviewer fromDB = op.get();
+			fromDB.setSupervisor(interviewer.getSupervisor());
+			fromDB.setName(interviewer.getName());
+			fromDB.setPriority(interviewer.getPriority());
+			this.dao.save(fromDB);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public String scheduleInterviews() {
 		return this.schedular.schedule().toString();
+	}
+
+	public List<Interviewer> getAllInterviewers() {
+		return this.dao.findAll();
 	}
 
 }

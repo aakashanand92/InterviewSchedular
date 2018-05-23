@@ -34,10 +34,12 @@ public class TimeSlotService {
 		return timeSlot.getId();
 	}
 
+	@Transactional
 	public void deleteTimeSlotForInterviewer(Integer interviewerId) {
 		dao.deleteTimeSlotForInterviewer(interviewerId);
 	}
 
+	@Transactional
 	public void deleteTimeSlotForCandidate(Integer candidateId) {
 		dao.deleteTimeSlotForCandidate(candidateId);
 	}

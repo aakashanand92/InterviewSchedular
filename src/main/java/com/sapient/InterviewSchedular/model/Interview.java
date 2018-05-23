@@ -1,12 +1,37 @@
 package com.sapient.InterviewSchedular.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+/**
+ * This will contain the data that represents the interview that is scheduled by
+ * the schedular. We will need to persist this.
+ * 
+ * @author aakanand1
+ *
+ */
+@Entity
 public class Interview {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
 
 	Integer candidateId;
 	Integer interviewerId;
 	Integer startTime;
 	Integer endTime;
 	String date;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getCandidateId() {
 		return candidateId;
