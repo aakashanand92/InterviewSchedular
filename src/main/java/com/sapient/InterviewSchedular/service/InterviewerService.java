@@ -1,13 +1,16 @@
 package com.sapient.InterviewSchedular.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sapient.InterviewSchedular.dao.InterviewerRepo;
+import com.sapient.InterviewSchedular.model.Interview;
 import com.sapient.InterviewSchedular.model.Interviewer;
 import com.sapient.InterviewSchedular.model.TimeSlot;
 
@@ -19,6 +22,8 @@ public class InterviewerService {
 	TimeSlotService timeSlotService;
 	@Autowired
 	Schedular schedular;
+	@Autowired
+	Environment env;
 
 	public void createInterviewer(Interviewer interviewer) {
 		dao.save(interviewer);
@@ -64,12 +69,16 @@ public class InterviewerService {
 		}
 	}
 
-	public String scheduleInterviews() {
-		return this.schedular.schedule().toString();
+	public List<Interview> scheduleInterviews() {
+		return this.schedular.schedule();
 	}
 
 	public List<Interviewer> getAllInterviewers() {
 		return this.dao.findAll();
+	}
+
+	public List<String> getAvailablePriority() {
+		return Arrays.asList(this.env.getProperty("sapient.schedular.priority_order").split(","));
 	}
 
 }

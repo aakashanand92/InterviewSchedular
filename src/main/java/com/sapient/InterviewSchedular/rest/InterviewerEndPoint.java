@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sapient.InterviewSchedular.model.Interview;
 import com.sapient.InterviewSchedular.model.Interviewer;
 import com.sapient.InterviewSchedular.model.TimeSlot;
 import com.sapient.InterviewSchedular.service.InterviewerService;
@@ -57,7 +58,7 @@ public class InterviewerEndPoint {
 
 	@CrossOrigin
 	@GetMapping("/schedule")
-	public String schedule() {
+	public List<Interview> schedule() {
 		return this.service.scheduleInterviews();
 	}
 
@@ -73,4 +74,9 @@ public class InterviewerEndPoint {
 		return this.service.getAllInterviewers();
 	}
 
+	@CrossOrigin
+	@GetMapping("/priority")
+	public List<String> getAvailablePriority() {
+		return this.service.getAvailablePriority();
+	}
 }
