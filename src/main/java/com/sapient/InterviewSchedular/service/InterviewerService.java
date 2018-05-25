@@ -63,6 +63,11 @@ public class InterviewerService {
 			fromDB.setName(interviewer.getName());
 			fromDB.setPriority(interviewer.getPriority());
 			this.dao.save(fromDB);
+			List<TimeSlot> timeSlotsToBeUpdated = this.timeSlotService.findTimeSlotByIntId(id);
+			timeSlotsToBeUpdated.stream().forEach((timeSlot) -> {
+				timeSlot.setPriority(interviewer.getPriority());
+				this.timeSlotService.updateTimeSlot(timeSlot);
+			});
 			return true;
 		} else {
 			return false;

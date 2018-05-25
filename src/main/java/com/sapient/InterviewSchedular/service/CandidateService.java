@@ -97,6 +97,11 @@ public class CandidateService {
 			fromDB.setPhoneNo(candidate.getPhoneNo());
 			fromDB.setPriority(candidate.getPriority());
 			this.dao.save(fromDB);
+			List<TimeSlot> timeSlotsToBeUpdated = this.timeSlotService.findTimeSlotByIntId(id);
+			timeSlotsToBeUpdated.stream().forEach((timeSlot) -> {
+				timeSlot.setPriority(candidate.getPriority());
+				this.timeSlotService.updateTimeSlot(timeSlot);
+			});
 			return true;
 		} else {
 			return false;

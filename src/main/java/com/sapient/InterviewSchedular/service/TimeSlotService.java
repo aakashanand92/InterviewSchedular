@@ -72,6 +72,11 @@ public class TimeSlotService {
 
 	}
 
+	@Transactional
+	public void updateTimeSlot(TimeSlot timeSlot) {
+		this.dao.save(timeSlot);
+	}
+
 	public void removeScheduled(Integer slotId) {
 		// this.dao.save(this.dao.findById(slotId).get().setScheduled(SCHEDULED_NO));
 	}
