@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Component;
 public class RuleEngine {
 	@Autowired
 	Environment env;
+	@Value("sapient.schedular.rules_to_check")
+	String rulesToCheck;
 	@Autowired
 	ApplicationContext ac;
 	public static final String DEFAULT_RULE_PACKAGE = "com.sapient.InterviewSchedular.rule";
